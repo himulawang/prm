@@ -1,0 +1,48 @@
+h2.text-info Create Connection
+div
+    .row.input-prepend
+        span.span2.add-on Id
+        input.span4(
+            id='ConnectionMgr-Id'
+            type="text"
+            value='#{id}'
+            disabled
+        )
+    .row.input-prepend
+        span.span2.add-on Name
+        input.span4(
+            id='ConnectionMgr-Name'
+            type="text"
+            value=''
+        )
+    .row.input-prepend
+        span.span2.add-on Host
+        input.span4(
+            id='ConnectionMgr-Host'
+            type="text"
+            value=''
+        )
+    .row.input-prepend
+        span.span2.add-on Port
+        input.span4(
+            id='ConnectionMgr-Port'
+            type="text"
+            value=''
+        )
+    .row.input-prepend
+        span.span2.add-on Password
+        input.span4(
+            id='ConnectionMgr-Password'
+            type="text"
+            value=''
+        )
+.row
+    .span1.offset3
+        input.btn.btn-large(
+            type='button'
+            value='OK'
+            onclick='connectionMgrView.onCreateConnection();'
+        )
+    .span1
+        input.btn.btn-large(type='button', value='Cancel')
+
