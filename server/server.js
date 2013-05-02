@@ -22,24 +22,14 @@ ws.on('request', function(req) {
     var id = connectionPool.push(connection);
     connection.id = id;
 
-    // server connection
-    var serverList = new I.Models.ServerList(id);
-    var server = new I.Models.Server();
-    server.id = 1;
-    server.address = '127.0.0.1';
-    server.port = '6379';
-    server.password = null;
-    server.redis = require('redis').createClient(server.port, server.address);
-
-    serverList.addSync(server);
-    dataPool.set('ServerList', id, serverList);
-
     console.log(connection.remoteAddress + " connected - Protocol Version " + connection.webSocketVersion);
 
     connection.on('close', function(reasonCode, description) {
         console.log(reasonCode, description);
+        // remove connection
         var id = connectionPool.remove(connection);
-        dataPool.unset('ServerList', id);
+        // close redis connection
+        I.Ctrl.ConnectionMgrController.CloseAll(id);
     });
 
     connection.on('message', function(message) {

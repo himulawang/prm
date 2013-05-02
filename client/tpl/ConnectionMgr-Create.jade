@@ -2,40 +2,27 @@ h2.text-info Create Connection
 div
     .row.input-prepend
         span.span2.add-on Id
-        input.span4(
-            id='ConnectionMgr-Id'
+        input#ConnectionMgr-Id.span4(
             type="text"
             value='#{id}'
             disabled
         )
     .row.input-prepend
         span.span2.add-on Name
-        input.span4(
-            id='ConnectionMgr-Name'
-            type="text"
-            value=''
-        )
+        input#ConnectionMgr-Name.span4(type="text")
     .row.input-prepend
         span.span2.add-on Host
-        input.span4(
-            id='ConnectionMgr-Host'
-            type="text"
-            value=''
-        )
+        input#ConnectionMgr-Host.span4(type="text")
     .row.input-prepend
         span.span2.add-on Port
-        input.span4(
-            id='ConnectionMgr-Port'
-            type="text"
-            value=''
-        )
+        input#ConnectionMgr-Port.span4(type="text")
     .row.input-prepend
         span.span2.add-on Password
-        input.span4(
-            id='ConnectionMgr-Password'
-            type="text"
-            value=''
-        )
+        input#ConnectionMgr-Password.span4(type="password")
+    .row.input-prepend
+        span.span2.add-on KeepAlive
+        .span3
+            input#ConnectionMgr-KeepAlive(type="checkbox", checked='checked')
 .row
     .span1.offset3
         input.btn.btn-large(

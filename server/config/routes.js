@@ -13,4 +13,12 @@ exports.routes = {
             serverId: 'ni',
         },
     },
+    // connection mgr
+    C0201: {
+        ctrl: 'ConnectionMgr',
+        action: 'RestartAll',
+        param: {
+            connectionList: 'nh',
+        },
+    },
 };

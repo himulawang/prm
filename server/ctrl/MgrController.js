@@ -11,7 +11,6 @@ exports.MgrController = {
             };
             connectionPool.single(connection, api, I.Const.PRMConst.REQUEST_RESULT_CODE_SUCCESS, data);
         });
-
     },
 };
 

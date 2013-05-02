@@ -10,6 +10,7 @@ exports.orms = [
         'password',
         'keepAlive',
         'handler',
+        'monitor',
     ],
     toAddFilter: [],
     toUpdateFilter: [0],

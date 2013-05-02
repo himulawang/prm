@@ -1,7 +1,10 @@
 .row-fluid
-    #ConnectionMgr-Tree.row-fluid.span3
-        .span4.offset1
-            input.btn(type="button", value="New", onclick='connectionMgrView.renderCreateConnection();')
-        .span4
-            input.btn(type="button", value="Restart All", onclick='connectionMgrView.restartAll();')
+    #ConnectionMgr-Tree.span3
+        #ConnectionMgr-Tree-Header.row-fluid
+            .span4.offset1
+                input.btn(type="button", value="New", onclick='connectionMgrView.renderCreateConnection();')
+            .span4
+                input.btn(type="button", value="Restart All", onclick='connectionMgrView.onRestartAll();')
+        p
+        #ConnectionMgr-Tree-Body.offset1
     #ConnectionMgr-Content.span9

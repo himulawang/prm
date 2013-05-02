@@ -9,4 +9,22 @@ var routes = {
         ctrl: 'Mgr',
         action: 'Init',
     },
+    // connection mgr
+    C0201: {
+        ctrl: 'ConnectionMgr',
+        action: 'RestartAll',
+    },
+    // monitor mgr
+    C0301: {
+        ctrl: 'MonitorMgr',
+        action: 'CommanderConnected',
+    },
+    C0302: {
+        ctrl: 'MonitorMgr',
+        action: 'MonitorConnected',
+    },
+    C0303: {
+        ctrl: 'MonitorMgr',
+        action: 'IncomingMonitorMessage',
+    },
 };
