@@ -19,5 +19,22 @@ exports.orms = [
     pk: 'id',
     pkAutoIncrement: true,
     list: 'ConnectionList',
+    storeType: 'Redis',
+},
+{
+    name: 'Client',
+    abb: 'c',
+    column: [
+        'id',
+        'name',
+    ],
+    toAddFilter: [],
+    toUpdateFilter: [0],
+    toAbbFilter: [],
+    toArrayFilter: [],
+    pk: 'id',
+    pkAutoIncrement: true,
+    list: 'ClientList',
+    storeType: 'Redis',
 },
 ];

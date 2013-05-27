@@ -5,7 +5,9 @@
     };
 
     ConnectionPKStore.prototype = new I.Models.ConnectionPKStoreBase();
-    ConnectionPKStore.prototype.constructor = ConnectionPKStore;
-
-    I.Util.require('ConnectionPKStore', 'Models', new ConnectionPKStore(db));
+    var functions = {
+        constructor: ConnectionPKStore,
+    }
+    I.Util.define(ConnectionPKStore.prototype, functions);
+    I.Util.require('ConnectionPKStore', 'Models', new ConnectionPKStore(rdb));
 }();

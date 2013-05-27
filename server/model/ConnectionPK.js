@@ -5,7 +5,9 @@
     };
 
     ConnectionPK.prototype = new I.Models.ConnectionPKBase();
-    ConnectionPK.prototype.constructor = ConnectionPK;
-
+    var functions = {
+        constructor: ConnectionPK,
+    }
+    I.Util.define(ConnectionPK.prototype, functions);
     I.Util.require('ConnectionPK', 'Models', ConnectionPK);
 }();

@@ -17,10 +17,12 @@ global.connectionPool = new I.ConnectionPool();
 var Route = new I.Route(routes);
 global.dataPool = new I.DataPool();
 
+var clientPK = new I.Models.ClientPK();
+
 ws.on('request', function(req) {
     var connection = req.accept('prm', req.origin);
-    var id = connectionPool.push(connection);
-    connection.id = id;
+    connectionPool.push(connection);
+    connection.id = clientPK.incr();
 
     console.log(connection.remoteAddress + " connected - Protocol Version " + connection.webSocketVersion);
 
@@ -46,4 +48,9 @@ ws.on('request', function(req) {
     });
 });
 
-server.listen(8081);
+var env = require('./config/env.js').env;
+server.listen(env.WEB.PORT);
+
+process.on('uncaughtException', function(err) {
+    console.log('uncaughtException', err);
+});

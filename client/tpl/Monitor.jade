@@ -1,5 +1,10 @@
 .Monitor.inline
-    .Monitor-Title
-        strong.text-info #{connection.name}
+    .Monitor-Title.row-fluid
+        .span5
+            strong.text-info #{connection.name}
+        .span2
+            span.label.label-error(id='Monitor-Status-#{connection.id}') Offline
+        .span2
+            input.btn.btn-mini(type='button', value='Clear', onclick='monitorMgrView.onClearLog(#{connection.id});')
     .Monitor-Log(id='Monitor-Log-#{connection.id}')
     .Monitor-Commander
