@@ -10,7 +10,6 @@
                 .then(function(list) {
                     dataPool.set('connectionList', 0, list);
                     connectionMgrView.render();
-                    monitorMgrView.render();
                 });
             I.Models.ConnectionPKStore
                 .get()

@@ -21,8 +21,8 @@ var clientPK = new I.Models.ClientPK();
 
 ws.on('request', function(req) {
     var connection = req.accept('prm', req.origin);
-    connectionPool.push(connection);
     connection.id = clientPK.incr();
+    connectionPool.push(connection);
 
     console.log(connection.remoteAddress + " connected - Protocol Version " + connection.webSocketVersion);
 

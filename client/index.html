@@ -2,6 +2,10 @@
 <html>
     <head>
         <title>ParaNoidz Redis Management</title>
+        <!-- css vendor -->
+        <link rel='stylesheet' href='./css/vendor/bootstrap/bootstrap.css'>
+        <link rel='stylesheet' href='./css/main.css'>
+
         <!-- js vendor -->
         <script src='./js/vendor/jquery/jquery-1.8.3.min.js'></script>
         <script src='./js/vendor/jade/jade.min.js'></script>
@@ -11,6 +15,7 @@
 
         <!-- config -->
         <script src='./js/config/env.js'></script>
+        <script src='./js/config/ex.js'></script>
         <script src='./js/config/routes.js'></script>
         <script src='./js/config/orm.js'></script>
 
@@ -22,10 +27,6 @@
         <script src='./js/model/ConnectionList.js'></script>
         <script src='./js/model/ConnectionListStore.js'></script>
 
-        <!-- ex -->
-        <script src='./js/ex/Exception.js'></script>
-        <script src='./js/ex/ExceptionCodes.js'></script>
-
         <!-- lib -->
         <script src='./js/lib/Renderer.js'></script>
         <script src='./js/lib/Resizer.js'></script>
@@ -33,19 +34,13 @@
         <!-- view -->
         <script src='./js/view/IndexView.js'></script>
         <script src='./js/view/ConnectionMgrView.js'></script>
-        <script src='./js/view/MonitorMgrView.js'></script>
+        <script src='./js/view/ManagerView.js'></script>
 
         <!-- controller -->
-        <script src='./js/ctrl/NetController.js'></script>
-        <script src='./js/ctrl/MgrController.js'></script>
-        <script src='./js/ctrl/MonitorMgrController.js'></script>
+        <script src='./js/ctrl/ManagerController.js'></script>
         <script src='./js/ctrl/ConnectionMgrController.js'></script>
 
         <script src='./js/main.js'></script>
-
-        <!-- css vendor -->
-        <link rel='stylesheet' href='./css/vendor/bootstrap/bootstrap.css'>
-        <link rel='stylesheet' href='./css/main.css'>
     </head>
     <body></body>
 </html>

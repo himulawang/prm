@@ -13,4 +13,3 @@ exports.MgrController = {
         });
     },
 };
-

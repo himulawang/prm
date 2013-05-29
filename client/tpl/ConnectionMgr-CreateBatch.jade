@@ -1,21 +1,20 @@
-h2.text-info Create Connection
+h2.text-info Create Batch Connection
 div
-    .row.input-prepend
-        span.span2.add-on Id
-        input#ConnectionMgr-Id.span4(
-            type="text"
-            value='#{id}'
-            disabled
-        )
     .row.input-prepend
         span.span2.add-on Name
         input#ConnectionMgr-Name.span4(type="text")
     .row.input-prepend
-        span.span2.add-on Host
-        input#ConnectionMgr-Host.span4(type="text")
+        span.span2.add-on From Host
+        input#ConnectionMgr-FromHost.span4(type="text")
     .row.input-prepend
-        span.span2.add-on Port
-        input#ConnectionMgr-Port.span4(type="text")
+        span.span2.add-on To Host
+        input#ConnectionMgr-ToHost.span4(type="text")
+    .row.input-prepend
+        span.span2.add-on From Port
+        input#ConnectionMgr-FromPort.span4(type="text")
+    .row.input-prepend
+        span.span2.add-on To Port
+        input#ConnectionMgr-ToPort.span4(type="text")
     .row.input-prepend
         span.span2.add-on Password
         input#ConnectionMgr-Password.span4(type="password")
@@ -28,7 +27,8 @@ div
         input.btn.btn-large(
             type='button'
             value='OK'
-            onclick='connectionMgrView.onCreateConnection();'
+            onclick='connectionMgrView.onCreateBatchConnection();'
         )
     .span1
         input.btn.btn-large(type='button', value='Cancel')
+

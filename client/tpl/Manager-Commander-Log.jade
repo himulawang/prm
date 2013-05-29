@@ -1,0 +1,11 @@
+div
+    .inline.text-success #{I.Util.getTime()}
+    .inline &nbsp
+    - if (Array.isArray(result)) {
+        for el,i in result
+            div #{i}) #{el}
+    - } else {
+            div #{result}
+    - }
+
+

@@ -15,26 +15,50 @@
             ctrl: 'ConnectionMgr',
             action: 'RestartAll',
         },
-        // monitor mgr
+        // manager
         C0301: {
-            ctrl: 'MonitorMgr',
-            action: 'CommanderConnected',
-        },
-        C0302: {
-            ctrl: 'MonitorMgr',
+            ctrl: 'Manager',
             action: 'MonitorConnected',
         },
+        C0302: {
+            ctrl: 'Manager',
+            action: 'MonitorConnectionError',
+        },
         C0303: {
-            ctrl: 'MonitorMgr',
-            action: 'IncomingMonitorMessage',
+            ctrl: 'Manager',
+            action: 'MonitorDisconnected',
         },
         C0304: {
-            ctrl: 'MonitorMgr',
-            action: 'HandlerConnectionError',
+            ctrl: 'Manager',
+            action: 'MonitorMessage',
         },
         C0305: {
-            ctrl: 'MonitorMgr',
-            action: 'MonitorConnectionError',
+            ctrl: 'Manager',
+            action: 'CommanderConnected',
+        },
+        C0306: {
+            ctrl: 'Manager',
+            action: 'CommanderConnectionError',
+        },
+        C0307: {
+            ctrl: 'Manager',
+            action: 'CommanderDisconnected',
+        },
+        C0308: {
+            ctrl: 'Manager',
+            action: 'CommanderMessage',
+        },
+        C0309: {
+            ctrl: 'Manager',
+            action: 'Disconnect',
+        },
+        C0310: {
+            ctrl: 'Manager',
+            action: 'Connect',
+        },
+        C0311: {
+            ctrl: 'Manager',
+            action: 'CommanderMessageAll',
         },
     };
 

@@ -1,0 +1,33 @@
+.Manager.inline
+    .row-fluid
+        .span6
+            strong.text-info #{connection.name}
+    .tabbable
+        ul.nav.nav-tabs
+            li.active
+                a.Monitor-Tab(href='#Monitor-#{connection.id}', data-toggle="tab") Monitor
+                    span.label.label-error(id='Monitor-Status-#{connection.id}') Off
+            li
+                a.Commander-Tab(href='#Commander-#{connection.id}', data-toggle="tab") Commander
+                    span.label.label-error(id='Commander-Status-#{connection.id}') Off
+            li.dropdown
+                a.dropdown-toggle(href='#', data-toggle="dropdown") Function
+                    b.caret
+                ul.dropdown-menu
+                    li: a(href='#', onclick='managerView.onSwitchAllToMonitor();') Switch All To Monitor
+                    li: a(href='#', onclick='managerView.onSwitchAllToCommander();') Switch All To Commander
+                    li: .divider
+                    li: a(href='#', onclick='managerView.onMonitorClear(#{connection.id});') Clear Monitor
+                    li: a(href='#', onclick='managerView.onCommanderClear(#{connection.id});') Clear Commander
+                    li: .divider
+                    li: a(href='#', onclick='managerView.onConnect(#{connection.id});') Connect
+                    li: a(href='#', onclick='managerView.onDisconnect(#{connection.id});') Disconnect
+        .tab-content
+            .tab-pane.active(id='Monitor-#{connection.id}')
+                .Monitor-Log(id='Monitor-Log-#{connection.id}')
+            .tab-pane(id='Commander-#{connection.id}')
+                .Commander-Log(id='Commander-Log-#{connection.id}')
+        input.Commander-Input(
+            id='Commander-Input-#{connection.id}'
+            type='text'
+            data-id='#{connection.id}')

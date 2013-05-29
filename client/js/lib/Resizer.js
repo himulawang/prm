@@ -1,7 +1,8 @@
 var Resizer = {
-    resizeMonitor: function resizeMonitor() {
-        var width = Math.floor(($('body').innerWidth() - MONITOR_COLUMN * 3) / MONITOR_COLUMN);
-        $('.Monitor').css('width', width);
+    resizeManager: function resizeManager() {
+        var column = I.env.MGR.COLUMN;
+        var width = Math.floor(($('body').innerWidth()) / column);
+        $('.Manager').css('width', width);
     },
 };
 

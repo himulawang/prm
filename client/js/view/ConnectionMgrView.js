@@ -12,6 +12,10 @@
             var html = Renderer.make('ConnectionMgr-Create', { id: id });
             $('#ConnectionMgr-Content').html(html);
         };
+        this.renderCreateBatchConnection = function renderCreateBatchConnection() {
+            var html = Renderer.make('ConnectionMgr-CreateBatch');
+            $('#ConnectionMgr-Content').html(html);
+        };
         this.renderTreeBody = function renderTreeBody() {
             var connectionList = dataPool.get('connectionList', 0);
             for (var id in connectionList) {
@@ -22,6 +26,9 @@
         this.renderTreeConnection = function renderTreeConnection(connection) {
             var html = Renderer.make('ConnectionMgr-Tree-Connection', { connection: connection });
             $('#ConnectionMgr-Tree-Body').append(html);
+        };
+        this.clearContent = function clearContent() {
+            $('#ConnectionMgr-Content').empty();
         };
         // event
         this.onCreateConnection = function onCreateConnection() {
@@ -40,9 +47,83 @@
             // pk
             dataPool.get('connection', 'PK').incr();
             dataPool.get('connectionList', 0).addSync(connection);
+
+            this.clearContent();
+        };
+        this.onCreateBatchConnection = function onCreateBatchConnection() {
+            var name = $('#ConnectionMgr-Name').val();
+            var fromHost = $('#ConnectionMgr-FromHost').val();
+            var toHost = $('#ConnectionMgr-ToHost').val();
+            var fromPort = $('#ConnectionMgr-FromPort').val();
+            var toPort = $('#ConnectionMgr-ToPort').val();
+            var password = $('#ConnectionMgr-Password').val();
+            var keepAlive = $('#ConnectionMgr-KeepAlive')[0].checked;
+
+            var util = I.Util;
+            if (!(util.isIP(fromHost) && util.isIP(toHost))) throw new I.Exception(30001);
+
+            var fromHostArr = fromHost.split('.');
+            var toHostArr = toHost.split('.');
+
+            if (fromHost === toHost) {
+                this.createBatchConnectionByPort(name, fromHost, fromPort, toPort, password, keepAlive);
+                this.renderTreeBody();
+                this.clearContent();
+                return;
+            }
+
+            if (
+                fromHostArr[0] === toHostArr[0] &&
+                fromHostArr[1] === toHostArr[1] &&
+                fromHostArr[2] === toHostArr[2]
+            ) {
+                if (toHostArr[3] < fromHostArr[3]) {
+                    var tmp = toHostArr[3];
+                    toHostArr[3] = fromHostArr[3];
+                    fromHostArr[3] = tmp;
+                }
+
+                var delta = toHostArr[3] - fromHostArr[3];
+                for (var i = 0; i <= delta; ++i) {
+                    var host = fromHostArr[0] + '.' + fromHostArr[1] + '.' + fromHostArr[2] + '.' + (parseInt(fromHostArr[3]) + i);
+                    this.createBatchConnectionByPort(name, host, fromPort, toPort, password, keepAlive);
+                }
+                this.renderTreeBody();
+                this.clearContent();
+            }
+        };
+        this.createBatchConnectionByPort = function createBatchConnectionByPort(name, host, fromPort, toPort, password, keepAlive) {
+            var pk = dataPool.get('connection', 'PK');
+            var ports = [fromPort, toPort];
+            fromPort = I.Util.min(ports);
+            toPort = I.Util.max(ports);
+
+            var delta = toPort - fromPort;
+            for (var i = 0; i <= delta; ++i) {
+                var port = fromPort + i;
+                var connection = new I.Models.Connection(
+                    [
+                        pk.incr(),
+                        name + '_' + host + ':' + port,
+                        host,
+                        port,
+                        password,
+                        keepAlive,
+                        null, // handler for server
+                    ]
+                );
+                dataPool.get('connectionList', 0).addSync(connection);
+            }
         };
         this.onRestartAll = function onRestartAll() {
             I.Ctrl.ConnectionMgrController.RestartAll();
+            managerView.render();
+        };
+        this.onRemoveAll = function onRemoveAll() {
+            var connectionList = dataPool.get('connectionList', 0);
+            connectionList.dropSync();
+            this.renderTreeBody();
+            $('#ConnectionMgr-Tree-Body').empty();
         };
     };
 

@@ -1,7 +1,7 @@
 !function() {
     var env = {
         APP: {
-            NAME: 'i',
+            NAME: 'prm',
             // 3: 'ERR', 4: 'WARNING', 5: 'NOTICE', 6: 'INFO', 7: 'DEBUG',
             LOG_LEVEL: 7,
         },
@@ -10,14 +10,22 @@
         },
         IDB: {
             ENABLED: true,
-            NAME: 'i',
-            VERSION: 1,
+            NAME: 'prm',
+            VERSION: 2,
         },
         WS: {
             ENABLED: true,
             URL: 'ws://' + window.location.host + '/',
             PROTOCOL: 'prm',
             AUTO_RECONNECT_INTERVAL: 800, // 0 is off
+        },
+        MGR: {
+            COLUMN: 5,
+
+            MONITOR_MAX_LOG: 500,
+            MONITOR_FILTER_INFO: true,
+
+            COMMANDER_MAX_LOG: 1000,
         },
     };
 

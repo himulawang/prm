@@ -4,13 +4,12 @@
         li.active
             a(href='#ConnectionMgr', data-toggle="tab") Connection Manager
         li
-            a(href='#MonitorMgr', data-toggle="tab") Monitor Manager
-        li
-            a(href='#Commander', data-toggle="tab") Commander
+            a(href='#Manager', data-toggle="tab") Manager
     .tab-content
         #ConnectionMgr.tab-pane.active
-        #MonitorMgr.tab-pane 
-        #Commander.tab-pane Content3
+        #Manager.tab-pane 
+            #Commander-All
+                input#Commander-Input-All(type='text', placeholder='Send command to all server')
 #Footer.row-fluid
     .span3.row-fluid
         #Status.span3
