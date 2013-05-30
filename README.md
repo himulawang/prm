@@ -107,4 +107,4 @@ http://localhost:8082/
 - jade: https://github.com/visionmedia/jade
 - Q: https://github.com/kriskowal/q
 
-  [1]: https://raw.github.com/himulawang/prm/master/doc/img/01_intro.jpg
+  [1]: https://raw.github.com/himulawang/prm/master/doc/img/01_intro.png
