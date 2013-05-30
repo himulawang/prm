@@ -27,6 +27,14 @@
             var html = Renderer.make('ConnectionMgr-Tree-Connection', { connection: connection });
             $('#ConnectionMgr-Tree-Body').append(html);
         };
+        this.renderModifyConnection = function renderModifyConnection(id) {
+            var connection = dataPool.get('connectionList', 0).get(id);
+            var html = Renderer.make('ConnectionMgr-Modify', { connection: connection });
+            $('#ConnectionMgr-Content').html(html);
+        };
+        this.renderRemoveConnection = function renderRemoveConnection(id) {
+            $('#ConnectionMgr-Tree-Connection-Id-' + id).remove();
+        };
         this.clearContent = function clearContent() {
             $('#ConnectionMgr-Content').empty();
         };
@@ -41,6 +49,7 @@
                     $('#ConnectionMgr-Password').val(),
                     $('#ConnectionMgr-KeepAlive')[0].checked,
                     null, // handler for server
+                    null, // monitor for server
                 ]
             );
 
@@ -49,6 +58,23 @@
             dataPool.get('connectionList', 0).addSync(connection);
 
             this.clearContent();
+        };
+        this.onModifyConnection = function onModifyConnection() {
+            var id = $('#ConnectionMgr-Id').val();
+            var connectionList = dataPool.get('connectionList', 0);
+            var connection = connectionList.get(id);
+
+            connection.name = $('#ConnectionMgr-Name').val();
+            connection.host = $('#ConnectionMgr-Host').val();
+            connection.port = $('#ConnectionMgr-Port').val();
+            connection.password = $('#ConnectionMgr-Password').val();
+            connection.keepAlive = $('#ConnectionMgr-KeepAlive')[0].checked;
+
+            connectionList.update(connection);
+
+            this.clearContent();
+
+            $('#ConnectionMgr-Tree-Connection-Name-' + connection.id).text(connection.name);
         };
         this.onCreateBatchConnection = function onCreateBatchConnection() {
             var name = $('#ConnectionMgr-Name').val();
@@ -124,6 +150,17 @@
             connectionList.dropSync();
             this.renderTreeBody();
             $('#ConnectionMgr-Tree-Body').empty();
+        };
+        this.onRemove = function onRemove(id) {
+            dataPool.get('connectionList', 0).delSync(id);
+            this.renderRemoveConnection(id);
+        };
+        this.onConnect = function onConnect(id) {
+            I.Ctrl.ManagerController.Connect(id);
+            var connection = dataPool.get('connectionList', 0).get(id);
+            managerView.renderRemoveManager(id);
+            managerView.renderManager(connection);
+            Resizer.resizeManager();
         };
     };
 

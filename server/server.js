@@ -31,7 +31,7 @@ ws.on('request', function(req) {
         // remove connection
         var id = connectionPool.remove(connection);
         // close redis connection
-        I.Ctrl.ConnectionMgrController.CloseAll(id);
+        I.Ctrl.ConnectionMgrController.CloseAll(connection, connection.id);
     });
 
     connection.on('message', function(message) {

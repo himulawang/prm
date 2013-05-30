@@ -1,8 +1,18 @@
-.ConnectionMgr-Connection
+.ConnectionMgr-Connection(id='ConnectionMgr-Tree-Connection-Id-#{connection.id}')
     .btn-group
-        button.btn #{connection.name}
+        button.btn(
+            id='ConnectionMgr-Tree-Connection-Name-#{connection.id}'
+            onclick='connectionMgrView.onConnect(#{connection.id});'
+        ) #{connection.name}
         a.btn.dropdown-toggle(href="#", data-toggle="dropdown")
             span.caret
         ul.dropdown-menu
             li
-                a(href="#") Delete
+                a(href="#"
+                    onclick='connectionMgrView.renderModifyConnection(#{connection.id});'
+                ) Modify
+            li: .divider
+            li
+                a(href="#"
+                    onclick='connectionMgrView.onRemove(#{connection.id});'
+                ) Delete

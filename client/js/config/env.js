@@ -12,6 +12,7 @@
             ENABLED: true,
             NAME: 'prm',
             VERSION: 2,
+            SYNC_INTERVAL: 10000,
         },
         WS: {
             ENABLED: true,

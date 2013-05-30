@@ -5,6 +5,7 @@
             Resizer.resizeManager();
         };
         this.renderManagers = function renderManagers() {
+            $('.Manager-Row').remove();
             var connectionList = dataPool.get('connectionList', 0);
 
             var i = 1;
@@ -26,11 +27,20 @@
         this.renderManager = function renderManager(connection) {
             var data = {
                 connection: connection,
+                redisCommands: JSON.stringify(RedisCommands),
             };
+            var rows = $('.Manager-Row');
+            if (rows.length === 0 || rows.last().children().length >= I.env.MGR.COLUMN) {
+                $('#Manager').append(Renderer.make('Manager-Row'));
+            }
+
             var html = Renderer.make('Manager', data);
             $('#Manager').children().last().append(html);
 
             $('#Commander-Input-' + connection.id).keyup(this.onCommanderInputKeyUp);
+        };
+        this.renderRemoveManager = function renderRemoveManager(id) {
+            $('#Manager-' + id).remove();
         };
         // monitor
         this.renderMonitorConnected = function renderMonitorConnected(id) {

@@ -1,14 +1,14 @@
-.Manager.inline
+.Manager.inline(id='Manager-#{connection.id}')
     .row-fluid
         .span6
             strong.text-info #{connection.name}
     .tabbable
         ul.nav.nav-tabs
             li.active
-                a.Monitor-Tab(href='#Monitor-#{connection.id}', data-toggle="tab") Monitor
+                a.Monitor-Tab(href='#Monitor-#{connection.id}', data-toggle="tab") Monitor&nbsp
                     span.label.label-error(id='Monitor-Status-#{connection.id}') Off
             li
-                a.Commander-Tab(href='#Commander-#{connection.id}', data-toggle="tab") Commander
+                a.Commander-Tab(href='#Commander-#{connection.id}', data-toggle="tab") Commander&nbsp
                     span.label.label-error(id='Commander-Status-#{connection.id}') Off
             li.dropdown
                 a.dropdown-toggle(href='#', data-toggle="dropdown") Function
@@ -30,4 +30,6 @@
         input.Commander-Input(
             id='Commander-Input-#{connection.id}'
             type='text'
+            data-provide='typeahead'
+            data-source=redisCommands
             data-id='#{connection.id}')

@@ -1,9 +1,14 @@
 $(function() {
     I.Loader.init(function() {
         $('#Status').html('<span class="label label-success">Online </span>');
-        //I.Ctrl.NetController.GetOnlineUserCount();
+        I.ws.onclose = function() {
+            $('.Manager-Row').remove();
+        };
     }, function() {
         I.Ctrl.ConnectionMgrController.LoadFromIDB();
+        setInterval(function() {
+            dataPool.sync();
+        }, I.env.IDB.SYNC_INTERVAL);
         /*
         var connectionPK = new I.Models.ConnectionPK();
         connectionPK.set(19);

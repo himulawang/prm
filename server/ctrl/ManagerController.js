@@ -47,12 +47,12 @@ exports.ManagerController = {
         var id = con.id;
         var cid = connection.id;
         if (con.monitor !== null) {
-            con.monitor.quit();
+            con.monitor.end();
             console.log('Disconnect', cid, id, 'monitor');
             con.monitor = null;
         }
         if (con.handler !== null) {
-            con.handler.quit();
+            con.handler.end();
             console.log('Disconnect', cid, id, 'handler');
             con.handler = null;
         }

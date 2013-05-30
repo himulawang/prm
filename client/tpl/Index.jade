@@ -9,7 +9,12 @@
         #ConnectionMgr.tab-pane.active
         #Manager.tab-pane 
             #Commander-All
-                input#Commander-Input-All(type='text', placeholder='Send command to all server')
+                input#Commander-Input-All(
+                    type='text'
+                    placeholder='Send command to all server'
+                    data-provide='typeahead'
+                    data-source=redisCommands
+                )
 #Footer.row-fluid
     .span3.row-fluid
         #Status.span3

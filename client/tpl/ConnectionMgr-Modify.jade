@@ -1,34 +1,35 @@
-h2.text-info Create Connection
+h2.text-info Modify Connection
 div
     .row.input-prepend
         span.span2.add-on Id
         input#ConnectionMgr-Id.span4(
             type="text"
-            value='#{id}'
+            value='#{connection.id}'
             disabled
         )
     .row.input-prepend
         span.span2.add-on Name
-        input#ConnectionMgr-Name.span4(type="text")
+        input#ConnectionMgr-Name.span4(type="text", value='#{connection.name}')
     .row.input-prepend
         span.span2.add-on Host
-        input#ConnectionMgr-Host.span4(type="text")
+        input#ConnectionMgr-Host.span4(type="text", value='#{connection.host}')
     .row.input-prepend
         span.span2.add-on Port
-        input#ConnectionMgr-Port.span4(type="text")
+        input#ConnectionMgr-Port.span4(type="text", value='#{connection.port}')
     .row.input-prepend
         span.span2.add-on Password
-        input#ConnectionMgr-Password.span4(type="password")
+        input#ConnectionMgr-Password.span4(type="password", value='#{connection.password}')
     .row.input-prepend
         span.span2.add-on KeepAlive
         .span3
-            input#ConnectionMgr-KeepAlive(type="checkbox", checked='checked')
+            input#ConnectionMgr-KeepAlive(type="checkbox", checked=connection.keepAlive ? 'checked' : '')
 .row
     .span1.offset3
         input.btn.btn-large(
             type='button'
             value='OK'
-            onclick='connectionMgrView.onCreateConnection();'
+            onclick='connectionMgrView.onModifyConnection();'
         )
     .span1
         input.btn.btn-large(type='button', value='Cancel', onclick='connectionMgrView.clearContent();')
+
