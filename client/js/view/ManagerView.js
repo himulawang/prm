@@ -105,7 +105,7 @@
             $el.children().remove();
         };
         this.onCommanderInputKeyUp = function onCommanderInputKeyUp(e) {
-            if (e.keyCode !== 13) return;
+            if (!(e.keyCode === 13 && e.ctrlKey)) return;
 
             var el = $(this);
             var data = {
@@ -117,7 +117,7 @@
             el.val('');
         };
         this.onCommanderInputAllKeyUp = function onCommanderInputAllKeyUp(e) {
-            if (e.keyCode !== 13) return;
+            if (!(e.keyCode === 13 && e.ctrlKey)) return;
 
             var el = $(this);
             var data = {
