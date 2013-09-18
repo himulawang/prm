@@ -1,0 +1,26 @@
+h2.text-info Modify Log
+div
+    .row.input-prepend
+        span.span2.add-on Id
+        input#ConnectionMgr-Id.span4(
+            type="text"
+            value='#{log.id}'
+            disabled
+        )
+    .row.input-prepend
+        span.span2.add-on Name
+        input#ConnectionMgr-Name.span4(type="text", value='#{log.name}')
+    .row.input-prepend
+        span.span2.add-on Path
+        input#ConnectionMgr-Path.span4(type="text", value='#{log.path}')
+.row
+    .span1.offset3
+        input.btn.btn-large(
+            type='button'
+            value='OK'
+            onclick='connectionMgrView.onModifyLog();'
+        )
+    .span1
+        input.btn.btn-large(type='button', value='Cancel', onclick='connectionMgrView.clearContent();')
+
+

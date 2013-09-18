@@ -13,6 +13,7 @@ var ws = new WebSocketServer({
     httpServer: server,
 });
 
+global.Tail = require('tail').Tail;
 global.connectionPool = new I.ConnectionPool();
 var Route = new I.Route(routes);
 global.dataPool = new I.DataPool();

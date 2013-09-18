@@ -11,7 +11,7 @@
         IDB: {
             ENABLED: true,
             NAME: 'prm',
-            VERSION: 2,
+            VERSION: 3,
             SYNC_INTERVAL: 10000,
         },
         WS: {

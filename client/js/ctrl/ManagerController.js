@@ -40,8 +40,17 @@
         },
         onConnect: function onConnect(data) {
         },
+        ConnectLog: function ConnectLog(id) {
+            var log = dataPool.get('logList', 0).get(id);
+            I.ws.send('C0312', { id: id, log: log.toAbbArray() });
+        },
+        onLogConnected: function onLogConnected(data) {
+        },
         CommanderMessageAll: function CommanderMessageAll(data) {
             I.ws.send('C0311', data);
+        },
+        onLogMessage: function onLogMessage(data) {
+            managerView.renderLogMessage(data);
         },
     };
 

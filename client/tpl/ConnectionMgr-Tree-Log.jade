@@ -1,0 +1,19 @@
+.ConnectionMgr-Log(id='ConnectionMgr-Tree-Log-Id-#{log.id}')
+    .btn-group
+        button.btn(
+            id='ConnectionMgr-Tree-Log-Name-#{log.id}'
+            onclick='connectionMgrView.onConnectLog(#{log.id});'
+        ) #{log.name}
+        a.btn.dropdown-toggle(href="#", data-toggle="dropdown")
+            span.caret
+        ul.dropdown-menu
+            li
+                a(href="#"
+                    onclick='connectionMgrView.renderModifyLog(#{log.id});'
+                ) Modify
+            li: .divider
+            li
+                a(href="#"
+                    onclick='connectionMgrView.onRemoveLog(#{log.id});'
+                ) Delete
+

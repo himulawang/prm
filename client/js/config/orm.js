@@ -22,6 +22,23 @@
         list: 'ConnectionList',
         storeType: 'IndexedDB',
     },
+    {
+        name: 'Log',
+        abb: 'l',
+        column: [
+            'id',
+            'name',
+            'path',
+        ],
+        toAddFilter: [],
+        toUpdateFilter: [0],
+        toAbbFilter: [],
+        toArrayFilter: [],
+        pk: 'id',
+        pkAutoIncrement: true,
+        list: 'LogList',
+        storeType: 'IndexedDB',
+    },
     ];
 
     if (I.Util.isBrowser()) {

@@ -60,6 +60,18 @@
             ctrl: 'Manager',
             action: 'CommanderMessageAll',
         },
+        C0312: {
+            ctrl: 'Manager',
+            action: 'ConnectLog',
+        },
+        C0313: {
+            ctrl: 'Manager',
+            action: 'LogConnected',
+        },
+        C0315: {
+            ctrl: 'Manager',
+            action: 'LogMessage',
+        },
     };
 
     I.Util.require('routes', '', routes);

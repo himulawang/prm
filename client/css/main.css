@@ -58,7 +58,7 @@ body {
     margin-right: auto;
 }
 
-.Manager {
+.Manager, .LogManager {
     border-bottom: 1px solid #DDD;
     font-size: 75%;
 }

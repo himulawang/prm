@@ -9,12 +9,22 @@
                 .get(0)
                 .then(function(list) {
                     dataPool.set('connectionList', 0, list);
-                    connectionMgrView.render();
+                    I.Models.LogListStore
+                        .get(0)
+                        .then(function(list) {
+                            dataPool.set('logList', 0, list);
+                            connectionMgrView.render();
+                        });
                 });
             I.Models.ConnectionPKStore
                 .get()
                 .then(function(pk) {
                     dataPool.set('connection', 'PK', pk);
+                });
+            I.Models.LogPKStore
+                .get()
+                .then(function(pk) {
+                    dataPool.set('log', 'PK', pk);
                 });
         },
     };

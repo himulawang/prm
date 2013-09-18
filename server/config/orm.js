@@ -37,4 +37,22 @@ exports.orms = [
     list: 'ClientList',
     storeType: 'Redis',
 },
+{
+    name: 'Log',
+    abb: 'l',
+    column: [
+        'id',
+        'name',
+        'path',
+        'handler',
+    ],
+    toAddFilter: [],
+    toUpdateFilter: [0],
+    toAbbFilter: [],
+    toArrayFilter: [],
+    pk: 'id',
+    pkAutoIncrement: true,
+    list: 'LogList',
+    storeType: 'Redis',
+},
 ];

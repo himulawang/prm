@@ -127,4 +127,49 @@ exports.ManagerController = {
             this._CommanderMessage(connection, params.cmd, con);
         }
     },
+    ConnectLog: function ConnectLog(connection, api, params) {
+        var cid = connection.id;
+        var logList = dataPool.get('logList', cid);
+        if (!logList) {
+            var logList = new I.Models.LogList(cid);
+            dataPool.set('logList', cid, logList);
+        }
+
+        var id = params.id;
+        var log = logList.get(id);
+        
+        if (log) {
+            this._DisconnectLog(connection, logList, log);
+        }
+
+        log = new I.Models.Log();
+        log.fromAbbArray(params.log);
+
+        this._ConnectLog(connection, log);
+        logList.set(log);
+
+        connectionPool.single(connection, 'C0313', 0, { id: id });
+    },
+    _DisconnectLog: function _DisconnectLog(connection, logList, log) {
+        var id = log.id;
+        var cid = connection.id;
+        if (log.handler !== null) {
+            log.handler.unwatch();
+            console.log('Disconnect Log', cid, id, 'handler');
+            log.handler = null;
+        }
+        logList.unset(log);
+    },
+    _ConnectLog: function _ConnectLog(connection, log) {
+        var id = log.id;
+        var cid = connection.id;
+
+        if (!log.handler) {
+            log.handler = new Tail(log.path);
+            console.log('Connect Log', cid, id, 'handler');
+            log.handler.on('line', function(data) {
+                connectionPool.single(connection, 'C0315', 0, { id: id, data: data });
+            });
+        }
+    },
 };

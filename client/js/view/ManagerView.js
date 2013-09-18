@@ -7,6 +7,7 @@
         this.renderManagers = function renderManagers() {
             $('.Manager-Row').remove();
             var connectionList = dataPool.get('connectionList', 0);
+            //var logList = dataPool.get('logList', 0);
 
             var i = 1;
             var column = I.env.MGR.COLUMN;
@@ -39,8 +40,24 @@
 
             $('#Commander-Input-' + connection.id).keyup(this.onCommanderInputKeyUp);
         };
+        this.renderLogManager = function renderLogManager(log) {
+            var data = {
+                log: log,
+                redisCommands: JSON.stringify(RedisCommands),
+            };
+            var rows = $('.Manager-Row');
+            if (rows.length === 0 || rows.last().children().length >= I.env.MGR.COLUMN) {
+                $('#Manager').append(Renderer.make('Manager-Row'));
+            }
+
+            var html = Renderer.make('LogManager', data);
+            $('#Manager').children().last().append(html);
+        };
         this.renderRemoveManager = function renderRemoveManager(id) {
             $('#Manager-' + id).remove();
+        };
+        this.renderRemoveLogManager = function renderRemoveLogManager(id) {
+            $('#Log-Manager-' + id).remove();
         };
         // monitor
         this.renderMonitorConnected = function renderMonitorConnected(id) {
@@ -65,6 +82,32 @@
             }
 
             var html = Renderer.make('Manager-Monitor-Log', data);
+            $el.prepend(html);
+        };
+        // log
+        this.renderLogConnected = function renderLogConnected(data) {
+            var log = dataPool.get('logList', 0).get(data.id);
+            var log = {
+                log: log.toArray(),
+            };
+
+            var rows = $('.Manager-Row');
+            if (rows.length === 0 || rows.last().children().length >= I.env.MGR.COLUMN) {
+                $('#Manager').append(Renderer.make('Manager-Row'));
+            }
+
+            var html = Renderer.make('LogManager', data);
+            $('#Manager').children().last().append(html);
+        };
+        this.renderLogMessage = function renderLogMessage(data) {
+            // remove if reach max log
+            var $el = $('#LogMonitor-Log-' + data.id);
+            var children = $el.children();
+            if (children.length > I.env.MGR.MONITOR_MAX_LOG) {
+                children.last().remove();
+            }
+
+            var html = Renderer.make('Manager-Tail-Log', data);
             $el.prepend(html);
         };
         // commander

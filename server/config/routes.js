@@ -34,6 +34,7 @@ exports.routes = {
         action: 'Connect',
         param: {
             id: 'ni',
+            connection: 'nh',
         },
     },
     C0311: {
@@ -41,6 +42,14 @@ exports.routes = {
         action: 'CommanderMessageAll',
         param: {
             cmd: 'ns',
+        },
+    },
+    C0312: {
+        ctrl: 'Manager',
+        action: 'ConnectLog',
+        param: {
+            id: 'ni',
+            log: 'nh',
         },
     },
 };

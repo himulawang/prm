@@ -16,20 +16,41 @@
             var html = Renderer.make('ConnectionMgr-CreateBatch');
             $('#ConnectionMgr-Content').html(html);
         };
+        this.renderCreateLog = function renderCreateLog() {
+            var id = dataPool.get('log', 'PK').get() + 1;
+
+            var html = Renderer.make('ConnectionMgr-CreateLog', { id: id });
+            $('#ConnectionMgr-Content').html(html);
+        };
         this.renderTreeBody = function renderTreeBody() {
             var connectionList = dataPool.get('connectionList', 0);
             for (var id in connectionList) {
                 var connection = connectionList.get(id);
                 this.renderTreeConnection(connection);
             }
+
+            var logList = dataPool.get('logList', 0);
+            for (var id in logList) {
+                var log = logList.get(id);
+                this.renderTreeLog(log);
+            }
         };
         this.renderTreeConnection = function renderTreeConnection(connection) {
             var html = Renderer.make('ConnectionMgr-Tree-Connection', { connection: connection });
             $('#ConnectionMgr-Tree-Body').append(html);
         };
+        this.renderTreeLog = function renderTreeLog(log) {
+            var html = Renderer.make('ConnectionMgr-Tree-Log', { log: log });
+            $('#ConnectionMgr-Tree-Body').append(html);
+        };
         this.renderModifyConnection = function renderModifyConnection(id) {
             var connection = dataPool.get('connectionList', 0).get(id);
             var html = Renderer.make('ConnectionMgr-Modify', { connection: connection });
+            $('#ConnectionMgr-Content').html(html);
+        };
+        this.renderModifyLog = function renderModifyLog(id) {
+            var log = dataPool.get('logList', 0).get(id);
+            var html = Renderer.make('ConnectionMgr-ModifyLog', { log: log });
             $('#ConnectionMgr-Content').html(html);
         };
         this.renderRemoveConnection = function renderRemoveConnection(id) {
@@ -75,6 +96,20 @@
             this.clearContent();
 
             $('#ConnectionMgr-Tree-Connection-Name-' + connection.id).text(connection.name);
+        };
+        this.onModifyLog = function onModifyLog() {
+            var id = $('#ConnectionMgr-Id').val();
+            var logList = dataPool.get('logList', 0);
+            var log = logList.get(id);
+
+            log.name = $('#ConnectionMgr-Name').val();
+            log.path = $('#ConnectionMgr-Path').val();
+
+            logList.update(log);
+
+            this.clearContent();
+
+            $('#ConnectionMgr-Tree-Log-Name-' + log.id).text(log.name);
         };
         this.onCreateBatchConnection = function onCreateBatchConnection() {
             var name = $('#ConnectionMgr-Name').val();
@@ -141,6 +176,21 @@
                 dataPool.get('connectionList', 0).addSync(connection);
             }
         };
+        this.onCreateLog = function onCreateLog() {
+            var log = new I.Models.Log(
+                [
+                    $('#ConnectionMgr-Id').val(),
+                    $('#ConnectionMgr-Name').val(),
+                    $('#ConnectionMgr-Path').val(),
+                ]
+            );
+
+            // pk
+            dataPool.get('log', 'PK').incr();
+            dataPool.get('logList', 0).addSync(log);
+
+            this.clearContent();
+        };
         this.onRestartAll = function onRestartAll() {
             I.Ctrl.ConnectionMgrController.RestartAll();
             managerView.render();
@@ -160,6 +210,13 @@
             var connection = dataPool.get('connectionList', 0).get(id);
             managerView.renderRemoveManager(id);
             managerView.renderManager(connection);
+            Resizer.resizeManager();
+        };
+        this.onConnectLog = function onConnectLog(id) {
+            I.Ctrl.ManagerController.ConnectLog(id);
+            var log = dataPool.get('logList', 0).get(id);
+            managerView.renderRemoveLogManager(id);
+            managerView.renderLogManager(log);
             Resizer.resizeManager();
         };
     };

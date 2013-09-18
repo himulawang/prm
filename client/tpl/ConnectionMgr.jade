@@ -2,11 +2,14 @@
     #ConnectionMgr-Tree.span3
         #ConnectionMgr-Tree-Header.row-fluid
             .span2.offset1
-                input.btn.btn-mini(type="button", value="Create", onclick='connectionMgrView.renderCreateConnection();')
+                input.btn.btn-mini(type="button", value="Create Redis", onclick='connectionMgrView.renderCreateConnection();')
             .span3
-                input.btn.btn-mini(type="button", value="Create Batch", onclick='connectionMgrView.renderCreateBatchConnection();')
+                input.btn.btn-mini(type="button", value="Create Batch Redis", onclick='connectionMgrView.renderCreateBatchConnection();')
             .span3
                 input.btn.btn-mini(type="button", value="Restart All", onclick='connectionMgrView.onRestartAll();')
+        .row-fluid
+            .span2.offset1
+                input.btn.btn-mini(type="button", value="Create Log", onclick='connectionMgrView.renderCreateLog();')
         .row-fluid
             .span2.offset1
                 input.btn.btn-mini(type="button", value="Remove All", onclick='connectionMgrView.onRemoveAll();')
